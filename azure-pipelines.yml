@@ -25,7 +25,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: $(System.DefaultWorkingDirectory)
+        workingDirectory: $(System.DefaultWorkingDirectory)/parent
         backendServiceArm: 'swapnilsc'
         backendAzureRmResourceGroupName: 'swapnilpipeline'
         backendAzureRmStorageAccountName: 'swapnilstr'
