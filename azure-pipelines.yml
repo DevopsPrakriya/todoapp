@@ -1,0 +1,47 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+- features/*
+
+pool: swapnilpersonal
+
+variables:
+  workDir: '$(System.DefaultWorkingDirectory)/environments/dev'
+
+stages:
+- stage: Build
+  displayName: Build 
+  jobs:
+  - job: TerraformInstall
+    displayName: terraform tool installing
+    steps: 
+    - task: TerraformInstaller@1
+      inputs:
+        terraformVersion: 'latest'
+  
+  - job: TerraformInitPlan
+    displayName: terraform init and Plan Job is running
+    steps:
+    - task: TerraformTask@5
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        backendServiceArm: 'swapnilsc'
+        backendAzureRmResourceGroupName: 'swapnilpipeline'
+        backendAzureRmStorageAccountName: 'swapnilstr'
+        backendAzureRmContainerName: 'tfstatefile'
+        backendAzureRmKey: 'todoappswap.tfstate'
+  
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
