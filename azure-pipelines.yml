@@ -10,7 +10,7 @@ trigger:
 pool: swapnilpersonal
 
 variables:
-  workDir: '$(System.DefaultWorkingDirectory)/environments/dev'
+  workDir: '$(System.DefaultWorkingDirectory)'
 
 stages:
 - stage: Build
