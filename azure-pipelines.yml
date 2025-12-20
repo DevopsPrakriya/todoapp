@@ -9,8 +9,7 @@ trigger:
 
 pool: swapnilpersonal
 
-variables:
-  workDir: '$(System.DefaultWorkingDirectory)'
+
 
 stages:
 - stage: Build
@@ -30,7 +29,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: '$workDir'
+        workingDirectory: $(System.DefaultWorkingDirectory)
         backendServiceArm: 'swapnilsc'
         backendAzureRmResourceGroupName: 'swapnilpipeline'
         backendAzureRmStorageAccountName: 'swapnilstr'
